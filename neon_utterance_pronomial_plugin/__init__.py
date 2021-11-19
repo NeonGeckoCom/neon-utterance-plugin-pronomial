@@ -39,6 +39,7 @@ class PronomialTransformer(UtteranceTransformer):
         context = context or {}
         lang = context.get("lang", "en-us")
         # replace coreferences
-        utterances += [pronomial.replace_corefs(utt, lang) for utt in utterances]
-        # return unchanged utterances + data
-        return utterances, {}
+        solved = [pronomial.replace_corefs(utt, lang) for utt in utterances]
+        solved = [u for u in solved if u not in utterances]
+        # return augmented utterances
+        return solved + utterances, {}
