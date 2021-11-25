@@ -22,16 +22,14 @@
 # LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-# pip install simple_NER
-# it's here mainly to test that a bad module does not cause failure
-# might be useful to tag entities in the future
-# check https://github.com/OpenJarbas/simple_NER
 from neon_transformers import UtteranceTransformer
 import pronomial
+from neon_transformers.tasks import UtteranceTask
 
 
 class PronomialTransformer(UtteranceTransformer):
+    task = UtteranceTask.COREFERENCE_RESOLUTION
+
     def __init__(self, name="pronomial", priority=70):
         super().__init__(name, priority)
 
